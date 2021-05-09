@@ -18,35 +18,22 @@ def S(line):
     return line,''
 
 def H(line):
-    result = "http://"
-    stack.extend(["H1","A"])
-    line = line[len(result):]
+    stack.extend(["H1","A","http://"])
     print("Applied rule: H → http://AH1")
-    return line,result
 
 def F(line):
-    result = "ftp://"
-    stack.extend(["Y1","/","L"])
-    line = line[len(result):]
+    stack.extend(["Y1","/","L","ftp://"])
     print("Applied rule:  F → ftp://L/Y1")
-    return line,result
 
 def T(line):
-    result = "telnet://"
-    stack.append("L")
-    line = line[len(result):]
+    stack.extend(["L", "telnet://"])
     print("Applied rule: T → telnet://L")
-    return line,result
 
 def M(line):
-    result = "mailto::"
-    stack.extend(["N","A","@","A"])
-    line = line[len(result):]
+    stack.extend(["N","A","@","A","mailto::"])
     print("Applied rule: M → mailto::A@AN")
-    return line,result
 
 def H1(line):
-    result = ""
     if(line.startswith(".") or line.startswith(":")):
         stack.extend(["H2","X"])
         print("Applied rule: H1 → XH2")
@@ -54,86 +41,57 @@ def H1(line):
         stack.extend(["H3","Y"])
         print("Applied rule: H1 → YH3")
     elif(line.startswith("?")):
-        result = line[0]
-        stack.append("Z")
+        stack.extend(["Z", "?"])
         print("Applied rule: H1 → ?Z")
     else:
         print("Applied rule: H1 → €")
-    line = line[len(result):]
-    return line,result
     
 def X(line):
-    result = ""
     if(line.startswith(".")):
-        result = line[0]
-        stack.extend(["X1","A"])
+        stack.extend(["X1", "A", "."])
         print("Applied rule: X → .AX1")
     if(line.startswith(":")):
-        result = line[0]
-        stack.append("C")
+        stack.extend(["C", ":"])
         print("Applied rule: X → :C")
-    line = line[len(result):]
-    return line,result
     
 def H2(line):
-    result = ""
     if(line.startswith("/")):
         stack.extend(["H3","Y"])
         print("Applied rule: H2 → YH3")
     if(line.startswith("?")):
-        result = line[0]
-        stack.append("Z")
+        stack.extend(["Z", "?"])
         print("Applied rule: H2 → ?Z")
     else:
         print("Applied rule: H2 → €")
-    line = line[len(result):]
-    return line,result
-        
+
         
 def Y(line):
-    result = ""
     if(line.startswith("/")):
-        result = line[0]
-        stack.extend(["A", "Y2"])
+        stack.extend(["Y2", "A", "/"])
         print("Applied rule: Y → /AY2")
-    line = line[len(result):]
-    return line,result
         
 def H3(line):
-    result = ""
     if(line.startswith("?")):
-        result = line[0]
-        stack.append("Z")
+        stack.extend(["Z","?"])
         print("Applied rule: H3 → ?Z")
     else:
         print("dolar")
         print("Applied rule: H3 → €")
-    line = line[len(result):]
-    return line,result
         
 def Z(line):
     if(line[0]>='a' and line[0]<='z' or line[0]>='0' and line[0]<='9'):
         stack.extend(["Z1", "A"])
         print("Applied rule: Z → AZ1")
-    return line,''
         
 def A(line):
-    result = ""
     if(line[0]>='a' and line[0]<='z' or line[0]>='0' and line[0]<='9'):
-        result = line[0]
-        stack.append("A1")
+        stack.extend(["A1", line[0]])
         print("Applied rule: A → xaplhaA1")
-    line = line[len(result):]
-    return line,result
         
 def C(line):
-    result = ""
     if(line[0]>='0' and line[0]<='9'):
-        result = line[0]
-        stack.append("C1")
+        stack.extend(["C1", line[0]])
         print("Applied rule: C → numericC1")
-    line = line[len(result):]
-    return line,result
         
 def X1(line):
     if(line.startswith(".") or line.startswith(":")):
@@ -141,7 +99,6 @@ def X1(line):
         print("Applied rule: X1 →  X")
     else:
         print("Applied rule: X1 →  €")
-    return line,''
         
 def Y2(line):    
     if(line.startswith("/")):
@@ -150,24 +107,18 @@ def Y2(line):
     else:
         print("dolar")
         print("Applied rule: Y2 →  €")
-    return line,''
         
 def Z1(line):
-    result = ""
     if(line.startswith("+")):
-        result = line[0]
-        stack.append("Z")
+        stack.extend(["Z", "+"])
         print("Applied rule: Z1 → +Z")
     else:
         print("Applied rule: Z1 → €")
-    line = line[len(result):]
-    return line,result
         
 def Y1(line):
     if(line[0]>='a' and line[0]<='z' or line[0]>='0' and line[0]<='9'):
         stack.extend(["Y3","A"])
         print("Applied rule: Y1 → AY3")
-    return line,''
         
 def Y3(line):
     if(line.startswith("/")):
@@ -176,31 +127,24 @@ def Y3(line):
     else:
         print("dolar")
         print("Applied rule: Y3 → €")
-    return line,''
         
 def L(line):
     if(line[0]>='a' and line[0]<='z' or line[0]>='0' and line[0]<='9'):
         stack.extend(["L1", "A"])
         print("Applied rule: L→ AL1")
-    return line,''
         
 def L1(line):
-    result = ""
     if(line.startswith(".") or line.startswith(":")):
         stack.append("X")
         print("Applied rule: L1 → X")
     if(line.startswith("*")):
-        result = line[0]
-        stack.extend(["L2", "A", "@", "A"])
+        stack.extend(["L2", "A", "@", "A", "*"])
         print("Applied rule: L1 → *A@AL2")
     if(line.startswith("@")):
-        result = line[0]
-        stack.extend(["L2", "A"])
+        stack.extend(["L2", "A", "@"])
         print("Applied rule: L1 → @AL2")
     else:
         print("Applied rule: L1 → €")
-    line = line[len(result):]
-    return line,result
         
 def L2(line):
     if(line.startswith(".") or line.startswith(":")):
@@ -208,16 +152,11 @@ def L2(line):
         print("Applied rule: L2 → X")
     else:
         print("Applied rule: L2 → €")
-    return line,''
               
 def N(line):
-    result = ""
     if(line.startswith(".")):
-        result = line[0]
-        stack.extend(["N1", "A"])
+        stack.extend(["N1", "A", "."])
         print("Applied rule: N → .AN1")
-    line = line[len(result):]
-    return line,result
         
 def N1(line):
     if(line.startswith(".")):
@@ -225,7 +164,6 @@ def N1(line):
         print("Applied rule: N1 → N")
     else:
         print("Applied rule: N1 → €")
-    return line,''
 
 def A1(line):
     if(line[0]>='a' and line[0]<='z' or line[0]>='0' and line[0]<='9'):
@@ -233,7 +171,6 @@ def A1(line):
         print("Applied rule: A1 → A")
     else:
         print("Applied rule: A1 → €")
-    return line,''
         
 def C1(line):
     if(line[0]>='0' and line[0]<='9'):
@@ -241,10 +178,11 @@ def C1(line):
         print("Applied rule: C1 → C")
     elif(line.startswith("/") or line.startswith("?")):
         print("Applied rule: C1 → €")
-    return line,''
         
-#-----------------------------------------------------------------------------------------------------        
+#------------------------------------------------------------------------------       
 
+nonterminals = ["S","H","F","T","M","H1","X","H2","Y","H3","Z","A","C","X1",
+                "Y2","Z1","Y1","Y3","L","L1","L2","N","N1","A1","C1"]
 
 file1 = open('input.txt', 'r')
 Lines = file1.readlines() 
@@ -255,11 +193,17 @@ for line in Lines:
     stack.append("S")
     while(1):
         if(len(stack)==0):
+            if(line == '\n'):
+                print("\n\nCorrect input\n\n")
+            else:
+                print("\n\nIncorrect input\n\n")
             break
         value=stack.pop()
-        line, res = eval(value+'(line)')
-        result = result + res
-        print("result: " + result)
+        print("\npoped from stack: " + value)
+        if(value in nonterminals):
+            eval(value+'(line)')
+        else:
+            line = line[len(value):]
         print("input: " + line + "stack: ")
         print(stack)
 

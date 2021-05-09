@@ -1,1 +1,10 @@
 http://google.com
+ftp://xfiit:heslo123@fiiit.sk/aula2
+telnet://xfiit:heslo123@fiiit.sk
+mailto::xfiitjozko@fiiit.sk
+http://gooogle.sk/search?jednorozec
+ftp://fiiit.sk/aula2/rad4/sedalo1
+telnet://studen.t.fiiit.sk:8080
+mailto::primator123@gmail.com
+http://g00gl3.sk/search?jednorozec+bez+rohu
+http://localhost:5050/api/carrier?fero
