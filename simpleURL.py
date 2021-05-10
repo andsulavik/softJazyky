@@ -187,24 +187,42 @@ nonterminals = ["S","H","F","T","M","H1","X","H2","Y","H3","Z","A","C","X1",
 file1 = open('input.txt', 'r')
 Lines = file1.readlines() 
 stack = []
+choice = ""
 for line in Lines:
     stack = []
     result = ""
     stack.append("S")
+    noSteps = 0
+    if(choice == "e"):
+        break
     while(1):
-        if(len(stack)==0):
-            if(line == '\n'):
-                print("\n\nCorrect input\n\n")
-            else:
-                print("\n\nIncorrect input\n\n")
+        if(choice!="r"):
+            choice = input("Please enter your choice (r RUN ALL, n NEXT STEP, numeric NUMBER OF STEPS, e END EXCECUTION):\n")
+        elif(len(stack)==0):
             break
-        value=stack.pop()
-        print("\npoped from stack: " + value)
-        if(value in nonterminals):
-            eval(value+'(line)')
-        else:
-            line = line[len(value):]
-        print("input: " + line + "stack: ")
-        print(stack)
+        if(choice == "n"):
+            noSteps = 1
+        if(choice.isnumeric()):
+            noSteps = int(choice)
+        if(choice == "e"):
+            break
+        while(choice == "r" or noSteps > 0):
+            if(choice!="r"):
+                noSteps = noSteps - 1
+            if(len(stack)==0):
+                if(line == '\n'):
+                    print("\n\nCorrect input\n\n")
+                else:
+                    print("\n\nIncorrect input\n\n")
+                
+                break
+            value=stack.pop()
+            print("\npoped from stack: " + value)
+            if(value in nonterminals):
+                eval(value+'(line)')
+            else:
+                line = line[len(value):]
+            print("input: " + line + "stack: ")
+            print(stack)
 
     
