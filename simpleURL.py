@@ -198,7 +198,7 @@ for line in Lines:
     while(1):
         if(choice!="r"):
             choice = input("Please enter your choice (r RUN ALL, n NEXT STEP, numeric NUMBER OF STEPS, e END EXCECUTION):\n")
-        elif(len(stack)==0):
+        if(len(stack)==0):
             break
         if(choice == "n"):
             noSteps = 1
