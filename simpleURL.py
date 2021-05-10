@@ -191,7 +191,6 @@ choice = ""
 noSteps = 0
 for line in Lines:
     stack = []
-    result = ""
     stack.append("S")
     if(choice == "e"):
         break
@@ -224,4 +223,4 @@ for line in Lines:
             print("input: " + line + "stack: ")
             print(stack)
 
-    
+file1.close()    
