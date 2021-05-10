@@ -188,15 +188,15 @@ file1 = open('input.txt', 'r')
 Lines = file1.readlines() 
 stack = []
 choice = ""
+noSteps = 0
 for line in Lines:
     stack = []
     result = ""
     stack.append("S")
-    noSteps = 0
     if(choice == "e"):
         break
     while(1):
-        if(choice!="r"):
+        if(choice!="r" and noSteps==0):
             choice = input("Please enter your choice (r RUN ALL, n NEXT STEP, numeric NUMBER OF STEPS, e END EXCECUTION):\n")
         if(len(stack)==0):
             break
