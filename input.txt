@@ -1,6 +1,6 @@
 http://google.com
-ftp://xfiit:heslo123@fiiit.sk/aula2
-telnet://xfiit:heslo123@fiiit.sk
+ftp://xfiit*heslo123@fiiit.sk/aula2
+telnet://xfiit*heslo123@fiiit.sk
 mailto::xfiitjozko@fiiit.sk
 http://gooogle.sk/search?jednorozec
 ftp://fiiit.sk/aula2/rad4/sedalo1

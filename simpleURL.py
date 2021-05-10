@@ -199,6 +199,10 @@ for line in Lines:
         if(choice!="r" and noSteps==0):
             choice = input("Please enter your choice (r RUN ALL, n NEXT STEP, numeric NUMBER OF STEPS, e END EXCECUTION):\n")
         if(len(stack)==0):
+            if(line == '\n'):
+                    print("\n\nCorrect input\n\n")
+            else:
+                print("\n\nIncorrect input\n\n")
             break
         if(choice == "n"):
             noSteps = 1
@@ -209,12 +213,7 @@ for line in Lines:
         while(choice == "r" or noSteps > 0):
             if(choice!="r"):
                 noSteps = noSteps - 1
-            if(len(stack)==0):
-                if(line == '\n'):
-                    print("\n\nCorrect input\n\n")
-                else:
-                    print("\n\nIncorrect input\n\n")
-                
+            if(len(stack)==0):                
                 break
             value=stack.pop()
             print("\npoped from stack: " + value)
